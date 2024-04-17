@@ -1,0 +1,56 @@
+import { useState } from 'react';
+import { InputCheck, InputText } from './Input';
+import { Button } from './Button';
+
+const List = (props) => {
+	const [value, setValue] = useState(props.value);
+	const [isEdit, setIsEdit] = useState(false);
+	const [isChecked, setIsChecked] = useState(false);
+	const [data, setData] = useState({});
+
+	const handlerInput = (event) => {
+		setValue({ value: event.target.value, selected: isChecked });
+		console.log(value);
+	};
+
+	const handlerEdit = () => {
+		setIsEdit(!isEdit);
+	};
+
+	const handlerDone = () => {
+		setIsEdit(!isEdit);
+		setData({ value: value.value, selected: isChecked });
+		props.getData(data);
+	};
+
+	const handlerCheck = (event) => {
+		setIsChecked(event.target.checked);
+		setData({
+			value: value,
+			selected: event.target.checked,
+		});
+		props.getData(data);
+	};
+	return (
+		<div className='flex flex-row '>
+			{isEdit ? (
+				<>
+					<InputText
+						value={value.value}
+						onChange={handlerInput}
+						className='bg-green-200'
+					/>
+					<Button onClick={handlerDone}>Done</Button>
+				</>
+			) : (
+				<>
+					<InputText value={value.value} onChange={handlerInput} disabled />
+					<Button onClick={handlerEdit}>Edit</Button>
+				</>
+			)}
+			<InputCheck defaultChecked={false} onChange={handlerCheck} />
+		</div>
+	);
+};
+
+export default List;
