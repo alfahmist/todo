@@ -119,9 +119,11 @@ function App() {
 				<InputCheck onChange={handleInputCheck} checked={isSelect} />
 			</Grid> */}
 			<Grid>
-				{arrOfObj.map((data, index) => {
-					return <Item key={data.id} data={data} index={index} />;
-				})}
+				{arrOfObj
+					.filter((obj) => obj.isDelete === false)
+					.map((data, index) => {
+						return <Item key={data.id} data={data} index={index} />;
+					})}
 			</Grid>
 			{/* <div className='text-right'>
 				<Button onClick={handleDeleteSelected} className='px-4 bg-red-200'>

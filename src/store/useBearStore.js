@@ -8,7 +8,18 @@ export const useBearStore = create((set) => ({
 		set((state) => ({ bears: (state.bears = { value: 34 }) })),
 	// Data yang dikirim dalam bentuk object
 	add: (object) => set((state) => ({ arrOfObj: [...state.arrOfObj, object] })),
-	delete: () => {},
+	deleteById: (id) => {
+		set((state) => ({
+			arrOfObj: state.arrOfObj.map((obj) => {
+				if (obj.id === id) obj.isDelete = true;
+				return obj;
+
+				// if (obj.id === id) {
+				// 	obj.isDelete = true;
+				// }
+			}),
+		}));
+	},
 	done: () => {},
 	select: () => {},
 	selectAll: () => {},
