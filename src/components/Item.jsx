@@ -2,10 +2,13 @@ import { useState } from 'react';
 import { Button } from './Button';
 import { InputCheck, InputText } from './Input';
 import { Select } from './Select';
+import { useBearStore } from '../store/useBearStore';
 
 const Item = ({ index, data, getData }) => {
 	const [isEdit, setIsEdit] = useState(false);
 	const [value, setValue] = useState(data.value);
+
+	const { tambah } = useBearStore();
 
 	const done = () => {
 		setIsEdit(!isEdit);
@@ -46,7 +49,8 @@ const Item = ({ index, data, getData }) => {
 			>
 				{isEdit ? 'Done' : 'Edit'}
 			</Button>
-			<Button onClick={handleDelete}>Delete</Button>
+			{/* <Button onClick={handleDelete}>Delete</Button> */}
+			<Button onClick={tambah}>Delete</Button>
 			<InputCheck defaultChecked={data.isSelect} onChange={handleInputCheck} />
 		</>
 	);

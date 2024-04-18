@@ -3,6 +3,7 @@ import { Button } from './Button';
 import { InputText } from './Input';
 
 const InputTambah = (props) => {
+	const { tambahData } = useBearStore();
 	const [value, setValue] = useState('');
 
 	const handlerInput = (event) => {
