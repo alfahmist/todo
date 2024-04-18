@@ -5,7 +5,7 @@ import { Select } from './Select';
 import { useBearStore } from '../store/useBearStore';
 
 const Item = ({ index, data, getData }) => {
-	const { deleteById } = useBearStore();
+	const { deleteById, updateById } = useBearStore();
 	const [isEdit, setIsEdit] = useState(false);
 	const [value, setValue] = useState(data.value);
 
@@ -43,7 +43,17 @@ const Item = ({ index, data, getData }) => {
 				className='col-span-7'
 			/>
 			<Button
-				onClick={isEdit ? done : edit}
+				onClick={
+					isEdit
+						? () => {
+								setIsEdit(false);
+								updateById(data.id, value);
+								console.log(data);
+						  }
+						: () => {
+								setIsEdit(true);
+						  }
+				}
 				className={isEdit ? 'bg-slate-200' : ''}
 			>
 				{isEdit ? 'Done' : 'Edit'}

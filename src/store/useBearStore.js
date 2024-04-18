@@ -13,14 +13,17 @@ export const useBearStore = create((set) => ({
 			arrOfObj: state.arrOfObj.map((obj) => {
 				if (obj.id === id) obj.isDelete = true;
 				return obj;
-
-				// if (obj.id === id) {
-				// 	obj.isDelete = true;
-				// }
 			}),
 		}));
 	},
-	done: () => {},
+	updateById: (id, value) => {
+		set((state) => ({
+			arrofObj: state.arrOfObj.map((obj) => {
+				if (obj.id === id) obj.value = value;
+				return obj;
+			}),
+		}));
+	},
 	select: () => {},
 	selectAll: () => {},
 }));
