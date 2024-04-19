@@ -4,35 +4,16 @@ import { InputCheck, InputText } from './Input';
 import { Select } from './Select';
 import { useBearStore } from '../store/useBearStore';
 
-const Item = ({ index, data, getData }) => {
+const Item = ({ index, data }) => {
 	const { deleteById, updateById, selectById, arrOfObj, setStatus } =
 		useBearStore();
 	const [isEdit, setIsEdit] = useState(false);
 	const [value, setValue] = useState(data.value);
 
-	const done = () => {
-		setIsEdit(!isEdit);
-		setValue(value);
-		getData(index, value, 'value');
-	};
-	const edit = () => {
-		setIsEdit(!isEdit);
-	};
 	const handleInputText = (event) => {
 		setValue(event.target.value);
 	};
 
-	const handleDelete = () => {
-		getData(index, true, 'isDelete');
-	};
-
-	const handleInputCheck = (event) => {
-		getData(index, event.target.checked, 'isSelect');
-	};
-
-	const handleSelect = (event) => {
-		getData(index, event.target.value, 'status');
-	};
 	return (
 		<>
 			<span>{index + 1}.</span>
@@ -62,7 +43,6 @@ const Item = ({ index, data, getData }) => {
 			>
 				{isEdit ? 'Done' : 'Edit'}
 			</Button>
-			{/* <Button onClick={handleDelete}>Delete</Button> */}
 			<Button
 				onClick={() => {
 					deleteById(data.id);
@@ -72,12 +52,9 @@ const Item = ({ index, data, getData }) => {
 				Delete
 			</Button>
 			<InputCheck
-				// defaultChecked={data.isSelect}
 				checked={data.isSelect}
 				onChange={(event) => {
 					selectById(data.id, event.target.checked);
-					// console.log('selected');
-					// console.log(selected);
 					console.log('arrOfObj');
 					console.log(arrOfObj);
 				}}
