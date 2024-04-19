@@ -6,6 +6,7 @@ import { InputCheck, InputText } from './components/Input';
 import Item from './components/Item';
 import { Grid } from './components/Grid';
 import { useBearStore } from './store/useBearStore';
+import Board from './components/Board';
 
 function App() {
 	const { add, arrOfObj, deleteSelected, selectAll } = useBearStore();
@@ -151,6 +152,11 @@ function App() {
 				>
 					Delete Selected
 				</Button>
+			</div>
+			<div className='flex flex-row justify-around'>
+				<Board datas={arrOfObj} status={'todo'}></Board>
+				<Board datas={arrOfObj} status={'in-progress'}></Board>
+				<Board datas={arrOfObj} status={'done'}></Board>
 			</div>
 		</div>
 	);
