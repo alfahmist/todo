@@ -25,10 +25,14 @@ export const useBearStore = create((set) => ({
 	add: (object) => set((state) => ({ arrOfObj: [...state.arrOfObj, object] })),
 	deleteById: (id) => {
 		set((state) => ({
-			arrOfObj: state.arrOfObj.map((obj) => {
-				if (obj.id === id) obj.isDelete = true;
-				return obj;
-			}),
+			arrOfObj: state.arrOfObj
+				.map((obj) => {
+					if (obj.id === id) obj.isDelete = true;
+					return obj;
+				})
+				.filter((obj) => {
+					return obj.isDelete === false;
+				}),
 		}));
 	},
 
@@ -66,10 +70,10 @@ export const useBearStore = create((set) => ({
 			// 	{ id: 5, value: 5, isDelete: false, isSelect: false, status: 'todo' },
 			// 	{ id: 6, value: 6, isDelete: false, isSelect: false, status: 'todo' },
 			// ]),
-			selected: (state.selected = [...state.arrOfObj].map((obj) => {
+			arrOfObj: state.arrOfObj.map((obj) => {
 				if (obj.id === id) obj.isSelect = isSelect;
 				return obj;
-			})),
+			}),
 		}));
 	},
 
@@ -79,10 +83,20 @@ export const useBearStore = create((set) => ({
 			double: state.count,
 		})),
 	deleteSelected: () => {
-		set((state) =>
-			state.arrOfObj.filter((data) => {
-				return data.isSelect === false;
+		set(
+			(state) => ({
+				arrOfObj: state.arrOfObj
+					.map((obj) => {
+						obj.isDelete = obj.isSelect;
+						return obj;
+					})
+					.filter((obj) => {
+						return obj.isDelete === false;
+					}),
 			})
+			// state.arrOfObj.filter((data) => {
+			// 	return data.isSelect === false;
+			// })
 		);
 
 		// set((state) => ({
