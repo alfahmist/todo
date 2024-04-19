@@ -5,7 +5,8 @@ import { Select } from './Select';
 import { useBearStore } from '../store/useBearStore';
 
 const Item = ({ index, data, getData }) => {
-	const { deleteById, updateById, selectById, arrOfObj } = useBearStore();
+	const { deleteById, updateById, selectById, arrOfObj, setStatus } =
+		useBearStore();
 	const [isEdit, setIsEdit] = useState(false);
 	const [value, setValue] = useState(data.value);
 
@@ -35,7 +36,10 @@ const Item = ({ index, data, getData }) => {
 	return (
 		<>
 			<span>{index + 1}.</span>
-			<Select value={data.status} onChange={handleSelect} />
+			<Select
+				value={data.status}
+				onChange={(event) => setStatus(data.id, event.target.value)}
+			/>
 			<InputText
 				onChange={handleInputText}
 				value={value}

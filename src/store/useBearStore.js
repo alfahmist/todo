@@ -103,7 +103,14 @@ export const useBearStore = create((set) => ({
 		// 	arrOfObj: state.selected,
 		// }));
 	},
+	setStatus: (id, status) => {
+		set((state) => ({
+			arrOfObj: state.arrOfObj.map((obj) => {
+				if (obj.id === id) obj.status = status;
+				return obj;
+			}),
+		}));
+	},
 	reset: () => set({ count: 0 }),
-
 	selectAll: () => {},
 }));
