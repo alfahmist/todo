@@ -72,7 +72,8 @@ const Item = ({ index, data, getData }) => {
 				Delete
 			</Button>
 			<InputCheck
-				defaultChecked={data.isSelect}
+				// defaultChecked={data.isSelect}
+				checked={data.isSelect}
 				onChange={(event) => {
 					selectById(data.id, event.target.checked);
 					// console.log('selected');

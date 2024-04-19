@@ -8,8 +8,9 @@ import { Grid } from './components/Grid';
 import { useBearStore } from './store/useBearStore';
 
 function App() {
-	const { add, arrOfObj, deleteSelected } = useBearStore();
+	const { add, arrOfObj, deleteSelected, selectAll } = useBearStore();
 	const [value, setValue] = useState('');
+	const [all, setAll] = useState(false);
 	// const [arr, setArr] = useState([]);
 	// useEffect(() => {
 	// 	setArr(arrOfObj);
@@ -113,14 +114,20 @@ function App() {
 					Tambah
 				</Button>
 			</Grid>
-			{/* <Grid>
+			<Grid className='bg-red-200'>
 				<span>No</span>
 				<span>Status</span>
 				<span className='col-span-7'>Text</span>
 				<span>Edit</span>
 				<span>Delete</span>
-				<InputCheck onChange={handleInputCheck} checked={isSelect} />
-			</Grid> */}
+				<InputCheck
+					onChange={(event) => {
+						selectAll(event.target.checked);
+						setAll(!all);
+					}}
+					checked={all}
+				/>
+			</Grid>
 			<Grid>
 				{arrOfObj
 					// .filter((obj) => obj.isDelete === false)
@@ -135,6 +142,7 @@ function App() {
 						console.log('arrOfObj');
 						console.log(arrOfObj);
 						deleteSelected();
+						setAll(false);
 						// const arra = arrOfObj.filter((data) => data.isSelect !== true);
 						// console.log(arra);
 						// setArr(arra);
