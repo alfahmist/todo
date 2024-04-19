@@ -8,9 +8,12 @@ import { Grid } from './components/Grid';
 import { useBearStore } from './store/useBearStore';
 
 function App() {
-	const { add, arrOfObj } = useBearStore();
+	const { add, arrOfObj, deleteSelected } = useBearStore();
 	const [value, setValue] = useState('');
-
+	const [arr, setArr] = useState([]);
+	useEffect(() => {
+		setArr(arrOfObj);
+	}, []);
 	const object = {
 		id: arrOfObj.length + 1,
 		value: value,
@@ -119,17 +122,28 @@ function App() {
 				<InputCheck onChange={handleInputCheck} checked={isSelect} />
 			</Grid> */}
 			<Grid>
-				{arrOfObj
+				{arr
 					.filter((obj) => obj.isDelete === false)
+					// .filter((obj) => obj.isSelect === false)
 					.map((data, index) => {
 						return <Item key={data.id} data={data} index={index} />;
 					})}
 			</Grid>
-			{/* <div className='text-right'>
-				<Button onClick={handleDeleteSelected} className='px-4 bg-red-200'>
+			<div className='text-right'>
+				<Button
+					onClick={() => {
+						console.log('arrOfObj');
+						console.log(arrOfObj);
+						deleteSelected();
+						const arra = arrOfObj.filter((data) => data.isSelect !== true);
+						console.log(arra);
+						setArr(arra);
+					}}
+					className='px-4 bg-red-200'
+				>
 					Delete Selected
 				</Button>
-			</div> */}
+			</div>
 		</div>
 	);
 }

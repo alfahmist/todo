@@ -5,7 +5,7 @@ import { Select } from './Select';
 import { useBearStore } from '../store/useBearStore';
 
 const Item = ({ index, data, getData }) => {
-	const { deleteById, updateById } = useBearStore();
+	const { deleteById, updateById, selectById, arrOfObj } = useBearStore();
 	const [isEdit, setIsEdit] = useState(false);
 	const [value, setValue] = useState(data.value);
 
@@ -67,7 +67,16 @@ const Item = ({ index, data, getData }) => {
 			>
 				Delete
 			</Button>
-			<InputCheck defaultChecked={data.isSelect} onChange={handleInputCheck} />
+			<InputCheck
+				defaultChecked={data.isSelect}
+				onChange={(event) => {
+					selectById(data.id, event.target.checked);
+					// console.log('selected');
+					// console.log(selected);
+					console.log('arrOfObj');
+					console.log(arrOfObj);
+				}}
+			/>
 		</>
 	);
 };

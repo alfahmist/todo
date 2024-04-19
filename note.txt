@@ -1,0 +1,23 @@
+Delete => 
+1. tekan delete
+2. update isDelete = true
+3. render isDelete == false
+
+
+2 alur Select 
+Select => 
+1. pilih data
+2. update isSelect = true
+3. klik button untuk filter isSelect = false x
+- data akan update setelah pilih data x
+
+4. klik button untuk setArray(data dari useBearStore) pakai useState lalu filter isSelect false
+- data akan update setelah pilih data
+
+Select => 
+1. pilih data
+2. set isSelect = true
+    -bikin object {id, isSelect} untuk menampung data yang dipilih
+3. klik button untuk update data aslinya isSelect = true
+4. render isSelect = false
+- data akan update setelah klik button 
